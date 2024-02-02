@@ -1,7 +1,5 @@
 <script lang="ts">
-import SelecionarIngredientes from "./SelecionarIngredientes.vue";
 import Tag from "./Tag.vue";
-import SuaLista from "./SuaLista.vue";
 
 export default {
   data() {
@@ -9,30 +7,30 @@ export default {
       ingredientes: ["Tomate", "Cebola", "Alho", "Azeite", "Sal", "Pimenta"],
     };
   },
-  components: { SelecionarIngredientes, Tag, SuaLista },
+  components: { Tag },
 };
 </script>
 
 <template>
-  <main class="conteudo-principal">
-    <SuaLista />
-    <SelecionarIngredientes />
-  </main>
+  <section>
+    <span class="subtitulo-lg sua-lista-texto"> Sua lista: </span>
+
+    <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
+      <li v-for="ingrediente in ingredientes" :key="ingrediente">
+        <Tag :texto="ingrediente" ativa />
+      </li>
+    </ul>
+    <p v-else class="paragrafo lista-vazia">
+      <img
+        src="../assets/images/icones/lista-vazia.svg"
+        alt="Icone de pesquisa"
+      />
+      Sua lista está vazia, selecione ingredientes para começar a cozinhar!
+    </p>
+  </section>
 </template>
 
 <style scoped>
-.conteudo-principal {
-  padding: 6.5rem 7.5rem;
-  border-radius: 3.75rem 3.75rem 0rem 0rem;
-  background: var(--creme, #fffaf3);
-  color: var(--cinza, #444);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5rem;
-}
-
 .sua-lista-texto {
   color: var(--coral, #f0633c);
   display: block;
